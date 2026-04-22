@@ -6,40 +6,55 @@ import static org.junit.jupiter.api.Assertions.*;
 class QuantityMeasurementAppTest {
 
     @Test
-    void testEquality_SameValue() {
-        QuantityMeasurementApp.Feet f1 = new QuantityMeasurementApp.Feet(1.0);
-        QuantityMeasurementApp.Feet f2 = new QuantityMeasurementApp.Feet(1.0);
+    void testEquality_FeetToFeet_SameValue() {
+        var q1 = new QuantityMeasurementApp.Quantity(1.0,
+                QuantityMeasurementApp.LengthUnit.FEET);
+        var q2 = new QuantityMeasurementApp.Quantity(1.0,
+                QuantityMeasurementApp.LengthUnit.FEET);
 
-        assertTrue(f1.equals(f2));
+        assertTrue(q1.equals(q2));
+    }
+
+    @Test
+    void testEquality_InchToFeet_EquivalentValue() {
+        var q1 = new QuantityMeasurementApp.Quantity(12.0,
+                QuantityMeasurementApp.LengthUnit.INCH);
+        var q2 = new QuantityMeasurementApp.Quantity(1.0,
+                QuantityMeasurementApp.LengthUnit.FEET);
+
+        assertTrue(q1.equals(q2));
     }
 
     @Test
     void testEquality_DifferentValue() {
-        QuantityMeasurementApp.Feet f1 = new QuantityMeasurementApp.Feet(1.0);
-        QuantityMeasurementApp.Feet f2 = new QuantityMeasurementApp.Feet(2.0);
+        var q1 = new QuantityMeasurementApp.Quantity(1.0,
+                QuantityMeasurementApp.LengthUnit.FEET);
+        var q2 = new QuantityMeasurementApp.Quantity(2.0,
+                QuantityMeasurementApp.LengthUnit.FEET);
 
-        assertFalse(f1.equals(f2));
-    }
-
-    @Test
-    void testEquality_NullComparison() {
-        QuantityMeasurementApp.Feet f1 = new QuantityMeasurementApp.Feet(1.0);
-
-        assertFalse(f1.equals(null));
+        assertFalse(q1.equals(q2));
     }
 
     @Test
     void testEquality_SameReference() {
-        QuantityMeasurementApp.Feet f1 = new QuantityMeasurementApp.Feet(1.0);
+        var q1 = new QuantityMeasurementApp.Quantity(1.0,
+                QuantityMeasurementApp.LengthUnit.FEET);
 
-        assertTrue(f1.equals(f1));
+        assertTrue(q1.equals(q1));
     }
 
     @Test
-    void testEquality_NonNumericInput() {
-        QuantityMeasurementApp.Feet f1 = new QuantityMeasurementApp.Feet(1.0);
-        String invalid = "not a number";
+    void testEquality_NullComparison() {
+        var q1 = new QuantityMeasurementApp.Quantity(1.0,
+                QuantityMeasurementApp.LengthUnit.FEET);
 
-        assertFalse(f1.equals(invalid));
+        assertFalse(q1.equals(null));
+    }
+
+    @Test
+    void testEquality_InvalidUnit() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new QuantityMeasurementApp.Quantity(1.0, null);
+        });
     }
 }
