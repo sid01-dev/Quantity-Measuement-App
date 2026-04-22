@@ -1,15 +1,14 @@
-// Inside Quantity class
+public static void main(String[] args) {
 
-public Quantity add(Quantity other) {
+    Quantity q1 = new Quantity(1.0, LengthUnit.FEET);
+    Quantity q2 = new Quantity(12.0, LengthUnit.INCH);
 
-    if (other == null)
-        throw new IllegalArgumentException("Second operand cannot be null");
+    System.out.println("Feet result: " +
+            q1.add(q2, LengthUnit.FEET));
 
-    // Convert both to base (feet)
-    double sumInFeet = this.toFeet() + other.toFeet();
+    System.out.println("Inches result: " +
+            q1.add(q2, LengthUnit.INCH));
 
-    // Convert back to THIS unit
-    double resultValue = sumInFeet / this.unit.getFactor();
-
-    return new Quantity(resultValue, this.unit);
+    System.out.println("Yards result: " +
+            q1.add(q2, LengthUnit.YARD));
 }
