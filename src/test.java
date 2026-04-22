@@ -77,3 +77,15 @@ class QuantityMeasurementAppTest {
                 () -> q1.add(q1, null));
     }
 }
+
+@Test
+void testConvertToBase() {
+    assertEquals(1.0,
+            LengthUnit.INCH.toBase(12.0), 1e-6);
+}
+
+@Test
+void testConvertFromBase() {
+    assertEquals(12.0,
+            LengthUnit.INCH.fromBase(1.0), 1e-6);
+}
